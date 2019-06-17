@@ -1,0 +1,227 @@
+@import "_reset.scss";
+@import "_mixins.scss";
+
+/*------------------------------------*\
+    # Colour variables
+\*------------------------------------*/
+
+$yellow: #ffeb3b;
+$offYellow: #ceb342;
+$black: #000000;
+$white: #ffffff;
+
+/*------------------------------------*\
+    # Simple Typography Settings
+\*------------------------------------*/
+
+// Font Family
+$font-family-serif: 'Bitter', serif;
+$font-family-sans-serif: 'Varela Round', sans-serif;
+
+// Base Font for HTML
+$base-font-size: 16px;
+
+// Paragraph Styles
+$paragraph-color      : #505050;
+$paragraph-size       : rem(17px);
+$paragraph-line-height: 1.5em;
+$paragraph-margin     : 20px;
+
+// Header Styles
+$header-color      : #ffffff;
+$header-size       : rem(50px);
+$header-line-height: 1.25em;
+$header-margin     : $paragraph-margin;
+
+// Blockquote Styles
+$blockquote-color      : #505050;
+$blockquote-size       : rem(23px);
+$blockquote-line-height: 1.5em;
+$blockquote-margin     : $paragraph-margin * 1.5;
+
+// Links
+$link-color: #459bd9;
+
+// hr
+$hr-margin: 30px;
+
+// Type Misc
+$font-weight-bold: 800;
+$border-color: #DADADA;
+
+
+
+// Lists
+ul,
+ol {
+    margin: $paragraph-margin 0 0 20px;
+
+    li {
+        margin-top: 10px;
+        line-height: $paragraph-line-height;
+        color: $paragraph-color;
+    }
+
+    ul,
+    ol {
+        margin-top: 0;
+    }
+}
+
+ul {
+
+    li {
+        list-style: disc;
+    }
+
+    ul {
+
+        li {
+            list-style: circle;
+        }
+    }
+}
+
+ol {
+
+    li {
+        list-style: decimal;
+    }
+}
+
+
+// hr
+hr {
+    height: 1px;
+    margin: $hr-margin 0;
+    border: none;
+    background-color: $border-color;
+}
+
+
+// Blockquote
+blockquote {
+    margin: $blockquote-margin 0;
+    font-size: $blockquote-size;
+    line-height: $blockquote-line-height;
+    color: $blockquote-color;
+    text-align: center;
+    font-style: italic;
+}
+
+
+// Tables
+table {
+    width: 100%;
+    margin: $blockquote-margin 0;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid $border-color;
+    text-align: left;
+}
+
+th {
+    font-weight: $font-weight-bold;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
+// Figure
+figure {
+    margin: $blockquote-margin 0;
+
+    img {
+        margin: 0;
+    }
+}
+
+figcaption {
+    margin-top: 10px;
+    color: lighten($paragraph-color, 10%);
+    font-size: $paragraph-margin * 0.8;
+}
+
+
+// Code
+pre {
+    display: block;
+    margin: 0 0 40px 0;
+    padding: 20px;
+    background-color: lighten($border-color, 12%);
+    border: 1px solid $border-color;
+    overflow: auto;
+    border-radius: 3px;
+
+    code {
+        position: static;
+        padding: 0;
+        border: none;
+        line-height: 1.5em;
+    }
+}
+
+code {
+    position: relative;
+    top: -0.2em;
+    padding: 3px;
+    font-family: Courier New, Courier, monospace;
+    font-size: $paragraph-size / 1.2;
+    color: darken($border-color, 70%);
+    line-height: 1em;
+    pointer-events: none;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+}
+
+
+
+// Misc Styles
+em,
+i,
+.italic {
+    font-style: italic;
+}
+
+strong,
+b,
+.bold {
+    font-weight: $font-weight-bold;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    margin: $blockquote-margin 0;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    align-self: center;
+    white-space: nowrap;
+    border-radius: 30px;
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+    background: rgba(#ffffff, 0.3);
+    margin-top: 20px;
+    padding: 6px 14px;
+    font-weight: bold;
+    color: $black;
+    background: rgba(#ffffff, 0.6);
+    transition: all 0.25s;
+    cursor: pointer;
+
+    &:hover {
+        background: #ffffff;
+        color: $black;
+    }
+}
+
+@import "_main-layout";
+@import "_typography";
+

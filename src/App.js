@@ -1,28 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import DataProvider from './data/ContextData.js';
+import Instagram from './components/InstaBackground/InstaBackground.js';
+import Intro from './components/Intro/Intro.js';
+import AboutMe from './components/AboutMe/AboutMe.js';
+
+import './css/style.scss';
 
 class App extends Component {
+  
+  constructor(props){
+    super(props);
+
+    this.state = {
+      lightsOn: false,
+      introOpen: true
+    }
+  }
+
+  turnLightsOn = () => {
+    console.log('test');
+    this.setState({
+      lightsOn: !this.state.lightsOn,
+      introOpen: false
+    })
+  }
+  
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <div className="wrapper">
+          { this.state.introOpen === true ? <Intro lightSwitch={this.turnLightsOn} /> : <AboutMe /> }
+        </div>
+        <Instagram introOpen={this.state.introOpen} lightSwitch={this.state.lightsOn} />
       </div>
     );
-  }
+  } 
 }
 
 export default App;

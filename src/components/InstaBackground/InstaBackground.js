@@ -66,8 +66,7 @@ class Instagram extends React.Component {
         });
     }
 
-    updateImages = () => {
-        const setRandomImages = () => {            
+    setRandomImages = () => {            
             const activeImages = this.state.activeImgs;
             const randomActiveValue = Math.floor(Math.random()*activeImages.length);
             const randomActiveItem = activeImages[randomActiveValue];
@@ -86,35 +85,30 @@ class Instagram extends React.Component {
                 inactiveImgs: inactiveImages,
                 activeImgs: activeImages
             })      
-        }
-        
-        if(this.props.introOpen === true) {
-            this.intervalID = setInterval(e => setRandomImages(), 1000)
-        }
     }
 
-    animateIn = () => {
-        
+    // updateImages = () => {
+    //     if(this.props.introOpen === true) {
+    //         this.intervalID = setInterval(e => this.setRandomImages(), 1000)
+    //     }
+    // }
+
+    clearAnimation = () => {
+        clearInterval(this.intervalID);
     }
 
     componentDidMount(){
-        setTimeout(() => { 
-            this.introClass = ""
-        }, 1000);
+        this.intervalID = setInterval(e => this.setRandomImages(), 1000)
     }
   
 
     render() {
         let background = `insta-background ${this.props.lightSwitch ? 'insta-background--open' : ''}`;
-        background += `${this.props.introOpen === false ? ' insta-background--hide' : ''}`;
+        background += `${this.props.introOpen === false ? ' insta-background--hide insta-background--open' : ''}`;
         background += `${this.introClass}`;
 
         if (this.props.introOpen === false) {
-            clearInterval(this.intervalID);
-        }
-
-        if (this.props.introOpen === false) {
-            clearInterval(this.intervalID);
+            this.clearAnimation();
         }
 
         return (

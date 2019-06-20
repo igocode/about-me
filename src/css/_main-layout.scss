@@ -29,7 +29,7 @@
     > div {
         text-align: center;
         max-width: 900px;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
     }
 }
 
@@ -68,20 +68,35 @@
     }
 }
 
-.about-me {
+.lightSwitch{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 20px;
+    height: 30px;
+    width: 30px;
+    color: $white;
+}
+
+.social-footer {
     display: flex;
+    padding: 0 0 20px 0;
+    width: 100%;
+    height: 50px;
     justify-content: center;
-    align-items: center;
-    flex: 1 0 auto;
-    color: $black;
 
-    span {
-        color: darken($yellow, 25%);
-    }
+    &__icon{
+        width: 32px;
+        height: 32px;
+        margin: 0 10px;
+        color: $white;
+        border-radius: 100%;
+        background-color: rgba($white, 0.2);
+        transition: background 0.3s, color 0.3s; 
 
-    > div {
-        text-align: center;
-        max-width: 800px;
-        margin-bottom: 100px;
+        &:hover {
+            background: $white;
+            color: $black;
+        }
     }
 }

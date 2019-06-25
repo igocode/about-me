@@ -12,7 +12,6 @@ const ImageBlock = (props) => {
         </div>
     )
 }
-
 class Instagram extends React.Component {
     constructor(props){
         super(props);
@@ -23,9 +22,8 @@ class Instagram extends React.Component {
         this.getInstaImages();
     }
 
-    introClass = "insta-background--show";
     intervalID = 0;
-    
+    animating = false;
 
     getInstaImages = () => {
         let token = '1759117483.ebcb0e1.e727496b51af440cbdbc2c4c7f315dfc';
@@ -43,7 +41,6 @@ class Instagram extends React.Component {
                 return images;
             }).then(images => {
                 this.setInitialImgState(images);
-                this.updateImages();
             })
             .catch(err => {
                 console.log(err)
@@ -87,30 +84,35 @@ class Instagram extends React.Component {
             })      
     }
 
-    // updateImages = () => {
-    //     if(this.props.introOpen === true) {
-    //         this.intervalID = setInterval(e => this.setRandomImages(), 1000)
-    //     }
-    // }
+    updateImages = () => {
+        if(this.props.introOpen === true) {
+            this.intervalID = setInterval(e => this.setRandomImages(), 1000)
+        }
+    }
 
     clearAnimation = () => {
         clearInterval(this.intervalID);
     }
 
     componentDidMount(){
-        this.intervalID = setInterval(e => this.setRandomImages(), 1000)
+        if(this.animating === false){
+            this.updateImages();
+            this.animating = true;
+        }
     }
-  
 
     render() {
-        let background = `insta-background ${this.props.lightSwitch ? 'insta-background--open' : ''}`;
-        background += `${this.props.introOpen === false ? ' insta-background--hide insta-background--open' : ''}`;
-        background += `${this.introClass}`;
+        let background = `insta-background ${this.props.lightSwitch ? 'insta-background--lights-on ' : ''}`;
+        background += `${this.props.introOpen === false ? ' insta-background--hide' : 'insta-background--animate-in'}`;
 
-        if (this.props.introOpen === false) {
+        if (this.props.introOpen !== true || this.props.lightSwitch === true) {
             this.clearAnimation();
+            this.animating = false;
+        } else if(this.props.introOpen === true && this.animating === false) {
+            this.updateImages();
+            this.animating = true;
         }
-
+        
         return (
             <div className={background}>
                 { 

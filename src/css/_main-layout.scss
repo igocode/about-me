@@ -25,6 +25,9 @@
     align-items: center;
     flex: 1 0 auto;
     color: $white;
+    animation: slideIn 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count:1; 
 
     > div {
         text-align: center;
@@ -100,3 +103,16 @@
         }
     }
 }
+
+
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      margin-top: 50px;
+    }
+  
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }

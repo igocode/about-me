@@ -12,7 +12,6 @@ const IntroItem = (props) => {
           </div>
     ) 
 }
-
 class DataProvider extends Component {
 
     state = {

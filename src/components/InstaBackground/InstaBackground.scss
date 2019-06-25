@@ -61,7 +61,7 @@
         transition: all 0.5s;
 }
 
-    &--open {
+    &--lights-on {
         background: $yellow;
 
         &:before, &:after {
@@ -73,6 +73,7 @@
         position: relative;
         overflow: hidden;
         min-width: 0;
+        opacity: 1;
     
         &:after{
             content: "";
@@ -95,7 +96,7 @@
         }
     }
 
-    &--show {
+    &--animate-in {
         > div {
         min-width: 0;
         opacity: 0;

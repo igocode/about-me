@@ -7,8 +7,14 @@ require('es6-promise').polyfill();
 const ImageBlock = (props) => {
     return (
         <div>
-            <div className="bg-image fade-out" style ={ { backgroundImage: `url(${props.image.prevImg})` } }></div>
-            <div className="bg-image" style ={ { backgroundImage: `url(${props.image.url})` } }></div>
+            <div className="text-overlay">
+                <div class="text-overlay__inner">
+                    <p className="text-overlay__caption">{props.caption}</p>
+                    <p className="text-overlay__date">{props.created}</p>
+                </div>
+            </div>
+            <div className="bg-image fade-out" style ={ { backgroundImage: `url(${props.prevImg})` } }></div>
+            <div className="bg-image" style ={ { backgroundImage: `url(${props.url})` } }></div>
         </div>
     )
 }
@@ -35,6 +41,8 @@ class Instagram extends React.Component {
                     return { 
                         url: image.images.standard_resolution.url,
                         id: image.id,
+                        caption: image.caption.text,
+                        created: image.created_time,
                         prevImg: ''
                     }
                 })
@@ -101,14 +109,20 @@ class Instagram extends React.Component {
         }
     }
 
+    convertDate = (timestamp) => {
+        const d = new Date(timestamp * 1000);
+        console.log(d);
+        return d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
+    }
+
     render() {
         let background = `insta-background ${this.props.lightSwitch ? 'insta-background--lights-on ' : ''}`;
-        background += `${this.props.introOpen === false ? ' insta-background--hide' : 'insta-background--animate-in'}`;
+        background += `${this.props.introActive === false ? ' insta-background--hide' : 'insta-background--animate-in'}`;
 
-        if (this.props.introOpen !== true || this.props.lightSwitch === true) {
+        if (this.props.introActive !== true || this.props.lightSwitch === true) {
             this.clearAnimation();
             this.animating = false;
-        } else if(this.props.introOpen === true && this.animating === false) {
+        } else if(this.props.introActive === true && this.animating === false) {
             this.updateImages();
             this.animating = true;
         }
@@ -117,7 +131,16 @@ class Instagram extends React.Component {
             <div className={background}>
                 { 
                    this.state.activeImgs.map((image) => {
-                        return <ImageBlock key={image.id} image={image} />
+                       console.log(image);
+                       let props = {
+                           id: image.id,
+                           url: image.url,
+                           caption: image.caption,
+                           created: this.convertDate(image.created),
+                           prevImg: image.prevImg
+                       }
+
+                        return <ImageBlock key={props.id} {...props} />
                     })
                  }
             </div>

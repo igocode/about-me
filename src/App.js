@@ -13,7 +13,8 @@ class App extends Component {
 
     this.state = {
       lightsOn: false,
-      introOpen: true,
+      introActive: true,
+      aboutMeActive: false,
     }
   }
 
@@ -26,22 +27,25 @@ class App extends Component {
   openMoreDetails = () => {
     this.setState({
       lightsOn: !this.state.lightsOn,
-      introOpen: !this.state.introOpen
+      introActive: !this.state.introActive,
+      aboutMeActive: !this.state.aboutMeActive
     })
   }
   
   render() {
+    let wrapperClass = 'wrapper ';
+    wrapperClass += (this.state.introActive === true || this.state.aboutMeActive === false) && this.state.lightsOn === true ? "click-through" : "";
+
     return (
       <div>
-        <div className="wrapper">
-          { this.state.introOpen === true ? <Switch switch={this.turnLightsOn}></Switch> : "" }
+        { this.state.introActive === true ? <Switch switch={this.turnLightsOn}></Switch> : "" }
 
-          { this.state.introOpen === true && this.state.lightsOn === false ? <Intro introToggle={this.openMoreDetails} /> : "" }
-        
-          { this.state.introOpen === false ? <AboutMe introToggle={this.openMoreDetails} /> : "" }
+        <div className={wrapperClass}>
+          { this.state.introActive === true && this.state.lightsOn === false ? <Intro introToggle={this.openMoreDetails} /> : "" }
+          { this.state.aboutMeActive === true ? <AboutMe introToggle={this.openMoreDetails} /> : "" }
         </div>
         
-        <Instagram introOpen={this.state.introOpen} lightSwitch={this.state.lightsOn} />
+        <Instagram introActive={this.state.introActive} lightSwitch={this.state.lightsOn} />
       </div>
     );
   } 

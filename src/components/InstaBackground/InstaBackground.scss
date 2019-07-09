@@ -1,69 +1,74 @@
 @import '../../../src/css/style.scss';
 
 .insta-background {
+    display: -ms-grid;
     display: grid;
     position: fixed;
+    -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: ". . . . ." ". . . . ." ". . . . .";
+    grid-template-areas: ". . . . ."". . . . ."". . . . .";
 
     height: 100vh;
     width: 100vw;
     z-index: 0;
     transition: all 0.5s;
 
-    @media all and (-ms-high-contrast:none) {
-          display: -ms-grid;
-          -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
-          -ms-grid-rows: 1fr 1fr 1fr;  
-    }
 
     @media screen and (min-width: 920px) {
         -ms-grid-columns: 1fr 1fr 1fr;
-        -ms-grid-column-span:3;
+        -ms-grid-column-span: 3;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
     }
 
     @media screen and (min-width: 1200px) {
         -ms-grid-columns: 1fr 1fr 1fr 1fr;
-        -ms-grid-column-span:4;
+        -ms-grid-column-span: 4;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
     @media screen and (min-width: 1300px) {
         -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
-        -ms-grid-column-span:5;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+        -ms-grid-column-span: 5;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 
     &:before {
-        content:'';
+        display: block;
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.6);
+        background: rgba(0, 0, 0, 0.6);
         z-index: 2;
         transition: all 0.5s;
     }
 
     &:after {
-        content:'';
+        display: block;
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
-        background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 86%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
-        background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 86%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,1) 86%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-        z-index: 2;    
+        background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 1) 100%);
+        /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 1) 100%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 86%, rgba(0, 0, 0, 1) 100%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#000000', GradientType=1);
+        /* IE6-9 fallback on horizontal gradient */
+        z-index: 2;
         transition: all 0.5s;
     }
 
     &--lights-on {
         background: $yellow;
 
-        &:before, &:after {
+        &:before,
+        &:after {
             opacity: 0;
             z-index: -1;
         }
@@ -87,9 +92,9 @@
         color: $black;
         text-align: center;
 
-        &__inner{
+        &__inner {
             opacity: 0;
-            margin-top: 100%; 
+            margin-top: 100%;
             transition: all 0.5s;
             transition-delay: 0.5s;
         }
@@ -104,12 +109,12 @@
             font-size: $header-size/4;
         }
 
-        > div {
+        >div {
             position: relative;
             padding: 0 30px;
             margin-top: 20px;
 
-            &:after{
+            &:after {
                 content: "";
                 position: absolute;
                 top: -20px;
@@ -122,13 +127,13 @@
         }
     }
 
-    > div {
+    >div {
         position: relative;
         overflow: hidden;
         min-width: 0;
         opacity: 1;
-    
-        &:after{
+
+        &:after {
             content: "";
             display: block;
         }
@@ -137,15 +142,15 @@
             .text-overlay {
                 opacity: 1;
 
-                &__inner{
+                &__inner {
                     opacity: 1;
-                    margin-top: 10px; 
+                    margin-top: 10px;
                 }
             }
         }
     }
 
-    .bg-image{
+    .bg-image {
         position: absolute;
         top: 0;
         left: 0;
@@ -155,20 +160,21 @@
         background-size: cover;
         background-position: center;
 
-        &:first-child{
+        &:first-child {
             z-index: 1;
         }
     }
 
     &--animate-in {
-        > div {
-        min-width: 0;
-        opacity: 0;
-        @for $i from 1 through 15 {
-            &:nth-child(#{$i}) {
+        >div {
+            min-width: 0;
+            opacity: 0;
+
+            @for $i from 1 through 15 {
+                &:nth-child(#{$i}) {
                     animation: fadeIn 0.6s;
                     animation-fill-mode: forwards;
-                    animation-iteration-count:1;
+                    animation-iteration-count: 1;
                     animation-timing-function: ease-out;
                     animation-delay: $i * (1s / 15);
                 }
@@ -177,13 +183,14 @@
     }
 
     &--hide {
-        > div {
-        opacity: 1;
-        @for $i from 1 through 15 {
-            &:nth-child(#{$i}) {
+        >div {
+            opacity: 1;
+
+            @for $i from 1 through 15 {
+                &:nth-child(#{$i}) {
                     animation: fadeOut 0.6s;
                     animation-fill-mode: forwards;
-                    animation-iteration-count:1;
+                    animation-iteration-count: 1;
                     animation-timing-function: ease-out;
                     animation-delay: $i * (1s / 15);
                 }
@@ -203,11 +210,39 @@
 }
 
 @keyframes fadeIn {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-    0%   { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+
+ @media all and (-ms-high-contrast:none) {
+    .insta-background {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    transition: all 0.5s;
+
+        > div{
+            width: 25%;
+            height: 33.33%;
+        }
+    }
 }

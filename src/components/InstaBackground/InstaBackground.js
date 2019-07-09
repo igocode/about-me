@@ -8,7 +8,7 @@ const ImageBlock = (props) => {
     return (
         <div>
             <div className="text-overlay">
-                <div class="text-overlay__inner">
+                <div className="text-overlay__inner">
                     <p className="text-overlay__caption">{props.caption}</p>
                     <p className="text-overlay__date">{props.created}</p>
                 </div>
@@ -41,7 +41,7 @@ class Instagram extends React.Component {
                     return { 
                         url: image.images.standard_resolution.url,
                         id: image.id,
-                        caption: image.caption.text,
+                        caption: this.characterLimit(image.caption.text),
                         created: image.created_time,
                         prevImg: ''
                     }
@@ -93,7 +93,7 @@ class Instagram extends React.Component {
     }
 
     updateImages = () => {
-        if(this.props.introOpen === true) {
+        if(this.props.introActive === true) {
             this.intervalID = setInterval(e => this.setRandomImages(), 1000)
         }
     }
@@ -109,9 +109,18 @@ class Instagram extends React.Component {
         }
     }
 
+    characterLimit = (text) => {
+        const character = text.split("");
+        const characterLimit = 180;
+        const caption = character.filter((val, i) => i < characterLimit ? val  : '');
+        if(character.length > characterLimit){
+            caption.push('...');
+        }
+        return caption.join('');
+    }
+
     convertDate = (timestamp) => {
         const d = new Date(timestamp * 1000);
-        console.log(d);
         return d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
     }
 
@@ -131,7 +140,6 @@ class Instagram extends React.Component {
             <div className={background}>
                 { 
                    this.state.activeImgs.map((image) => {
-                       console.log(image);
                        let props = {
                            id: image.id,
                            url: image.url,

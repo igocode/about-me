@@ -31,11 +31,26 @@ h1 {
     margin-bottom: $header-margin;
     color: inherit;
     font-family: $font-family-sans-serif;
+
+    @include for-tablet-portrait-down {
+        font-size: 14px;
+        margin-bottom: $header-margin/1.8;
+    }
 }
 
 h2 {
     font-size: $header-size;
     margin-bottom: 34px;
+    
+    @include for-tablet-landscape-down {
+        font-size: $header-size/1.2;
+        margin-bottom: 25px;
+    }
+    
+    @include for-phone-only {
+        font-size: $header-size/1.8;
+        margin-bottom: 18px;
+    }git
 
     span{
         color: $yellow;

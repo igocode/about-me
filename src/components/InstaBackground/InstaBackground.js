@@ -38,10 +38,11 @@ class Instagram extends React.Component {
         axios.get('https://api.instagram.com/v1/users/self/media/recent/?access_token=' + token + '&count=' + num_photos)
             .then(res => {
                 const images = res.data.data.map((image) => {
+                    console.log(image);
                     return { 
                         url: image.images.standard_resolution.url,
                         id: image.id,
-                        caption: this.characterLimit(image.caption.text),
+                        caption: image.caption !== null ? this.characterLimit(image.caption.text) : '',
                         created: image.created_time,
                         prevImg: ''
                     }
